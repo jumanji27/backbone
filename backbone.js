@@ -1270,8 +1270,13 @@
       if (options && options.qs === false) {
         Backbone.history.navigate(fragment, options);
       }
-      else if (options && typeof options.qs === 'string') {
-        Backbone.history.navigate(fragment + '?' + options.qs, options);
+      else if (options && options.qs) {
+        if (options.qs_clear) {
+          Backbone.history.navigate(fragment + '?' + options.qs, options);
+        }
+        else {
+          Backbone.history.navigate(fragment + location.search + '&' + options.qs, options);
+        }
       }
       else {
         Backbone.history.navigate(fragment + location.search, options);
