@@ -1270,26 +1270,11 @@
 
     // Simple proxy to `Backbone.history` to save a fragment into the history.
     navigate: function(fragment, options) {
-      if (options && options.qs === false) {
-        Backbone.history.navigate(fragment, options);
-      }
-      else if (options && (options.qs || options.qs === '')) {
-        if (options.qs_clear) {
-          Backbone.history.navigate(fragment + '?' + options.qs, options);
-        }
-        else {
-          if (location.search) {
-            qs = location.search + '&';
-          }
-          else {
-            qs = '?';
-          }
-
-          Backbone.history.navigate(fragment + qs + options.qs, options);
-        }
+      if (options && (options.qs || options.qs === '')) {
+        Backbone.history.navigate(fragment + '?' + options.qs, options);
       }
       else {
-        Backbone.history.navigate(fragment + location.search, options);
+        Backbone.history.navigate(fragment, options);
       }
       return this;
     },
