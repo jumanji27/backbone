@@ -1,3 +1,6 @@
+// !!! https://github.com/jumanji27/backbone
+
+
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1275,7 +1278,14 @@
           Backbone.history.navigate(fragment + '?' + options.qs, options);
         }
         else {
-          Backbone.history.navigate(fragment + location.search + '&' + options.qs, options);
+          if (location.search) {
+            qs = location.search + '&';
+          }
+          else {
+            qs = '?';
+          }
+
+          Backbone.history.navigate(fragment + qs + options.qs, options);
         }
       }
       else {
@@ -1390,6 +1400,7 @@
           fragment = this.getHash();
         }
       }
+
       return fragment.replace(routeStripper, '');
     },
 
